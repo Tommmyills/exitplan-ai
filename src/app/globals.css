@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #ffffff;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f0c84a 0%, #f5d88a 40%, #22c97a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #f0c84a 0%, #f5d88a 60%, #e8b820 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-gold {
+  background: rgba(240, 200, 74, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(240, 200, 74, 0.2);
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 40px rgba(240, 200, 74, 0.15), 0 0 80px rgba(240, 200, 74, 0.05);
+}
+
+.glow-jade {
+  box-shadow: 0 0 40px rgba(34, 201, 122, 0.15), 0 0 80px rgba(34, 201, 122, 0.05);
+}
+
+/* Shimmer button */
+.btn-primary {
+  background: linear-gradient(135deg, #f0c84a, #e8b820, #f0c84a);
+  background-size: 200% 100%;
+  color: #0a0a0f;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  animation: shimmer 3s linear infinite;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(240, 200, 74, 0.4);
+}
+
+/* Noise overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Quiz option */
+.quiz-option {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.quiz-option:hover {
+  border-color: rgba(240, 200, 74, 0.4);
+  background: rgba(240, 200, 74, 0.06);
+}
+
+.quiz-option.selected {
+  border-color: #f0c84a;
+  background: rgba(240, 200, 74, 0.1);
+}
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(90deg, #f0c84a, #22c97a);
+  transition: width 0.4s ease;
+}
+
+/* Country card */
+.country-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s ease;
+}
+
+.country-card:hover {
+  border-color: rgba(240, 200, 74, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+/* Score ring */
+.score-ring {
+  background: conic-gradient(#f0c84a calc(var(--score) * 1%), rgba(255,255,255,0.06) 0);
+  border-radius: 50%;
+  padding: 3px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111118;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(240, 200, 74, 0.3);
+  border-radius: 3px;
+}
+
+/* Stagger animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
