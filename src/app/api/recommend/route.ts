@@ -3,9 +3,41 @@ import Anthropic from '@anthropic-ai/sdk'
 import { countryData } from '@/lib/countryData'
 import { QuizAnswers } from '@/types'
 
+export const maxDuration = 60
+
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || '',
 })
+
+async function callAI(prompt: string, attempt: number): Promise<string> {
+  const message = await client.messages.create({
+    model: 'claude-opus-4-5',
+    max_tokens: 4000,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+  })
+  return message.content[0].type === 'text' ? message.content[0].text : ''
+}
+
+async function callWithRetry(prompt: string, maxAttempts = 3): Promise<string> {
+  let lastError: Error | null = null
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await callAI(prompt, attempt)
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err))
+      console.error(`AI call attempt ${attempt} failed:`, lastError.message)
+      if (attempt < maxAttempts) {
+        await new Promise((r) => setTimeout(r, 1000 * attempt))
+      }
+    }
+  }
+  throw lastError
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     const countryContext = JSON.stringify(countryData, null, 2)
 
-    const prompt = `You are ExitPlan AI, an expert relocation consultant helping Americans move abroad. 
+    const prompt = `You are ExitPlan AI, an expert relocation consultant helping Americans move abroad.
 
 A user has completed a relocation quiz with these answers:
 - Monthly Budget: $${answers.budget}/month
@@ -48,24 +80,12 @@ Respond ONLY with a valid JSON array (no markdown, no backticks) in this exact f
 
 Score each country 1-100 based on how well it matches the user's specific needs. Make the summaries and relocation plan highly personalized to their quiz answers. Return exactly 3 countries.`
 
-    const message = await client.messages.create({
-      model: 'claude-opus-4-5',
-      max_tokens: 4000,
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    })
-
-    const responseText = message.content[0].type === 'text' ? message.content[0].text : ''
+    const responseText = await callWithRetry(prompt)
 
     let recommendations
     try {
       recommendations = JSON.parse(responseText)
     } catch {
-      // Try to extract JSON from the response
       const jsonMatch = responseText.match(/\[[\s\S]*\]/)
       if (jsonMatch) {
         recommendations = JSON.parse(jsonMatch[0])
