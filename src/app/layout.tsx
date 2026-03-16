@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navbar from '@/components/Navbar'
 
 export const metadata: Metadata = {
   title: 'ExitPlan AI – Find Your Perfect Country in 60 Seconds',
-  description: 'Discover the best country to move to as an American. AI-powered relocation recommendations based on your budget, lifestyle, and visa options.',
+  description: 'Discover the best country to move to as an American. AI-powered relocation recommendations, escape planning tools, and a complete guide to living abroad.',
 }
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-obsidian text-white antialiased">
+        <Navbar />
         {children}
       </body>
     </html>

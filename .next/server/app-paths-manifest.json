@@ -1,0 +1,16 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/stripe/route": "app/api/stripe/route.js",
+  "/escape/cheapest/page": "app/escape/cheapest/page.js",
+  "/escape/page": "app/escape/page.js",
+  "/escape/local-knowledge/page": "app/escape/local-knowledge/page.js",
+  "/escape/property/page": "app/escape/property/page.js",
+  "/escape/seasonal/page": "app/escape/seasonal/page.js",
+  "/quiz/page": "app/quiz/page.js",
+  "/escape/teach-english/page": "app/escape/teach-english/page.js",
+  "/escape/work-abroad/page": "app/escape/work-abroad/page.js",
+  "/api/recommend/route": "app/api/recommend/route.js",
+  "/page": "app/page.js",
+  "/results/page": "app/results/page.js",
+  "/score/page": "app/score/page.js"
+}

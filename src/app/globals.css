@@ -180,3 +180,156 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Black capsule button with gold glow */
+.btn-capsule {
+  display: inline-flex;
+  align-items: center;
+  background: #000;
+  border: 1px solid rgba(240, 200, 74, 0.35);
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 20px rgba(240, 200, 74, 0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-capsule:hover {
+  border-color: rgba(240, 200, 74, 0.7);
+  box-shadow: 0 0 40px rgba(240, 200, 74, 0.35), 0 0 80px rgba(240, 200, 74, 0.1), inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+  color: #f0c84a;
+}
+
+.btn-capsule-jade {
+  display: inline-flex;
+  align-items: center;
+  background: #000;
+  border: 1px solid rgba(34, 201, 122, 0.35);
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 20px rgba(34, 201, 122, 0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-capsule-jade:hover {
+  border-color: rgba(34, 201, 122, 0.7);
+  box-shadow: 0 0 40px rgba(34, 201, 122, 0.35), 0 0 80px rgba(34, 201, 122, 0.1);
+  transform: translateY(-2px);
+  color: #22c97a;
+}
+
+/* Liquid morphism blob */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: blobFloat 10s ease-in-out infinite;
+  pointer-events: none;
+}
+.blob-2 { animation-delay: -3s; animation-duration: 13s; }
+.blob-3 { animation-delay: -6s; animation-duration: 8s; }
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -30px) scale(1.04); }
+  50% { transform: translate(-15px, 20px) scale(0.97); }
+  75% { transform: translate(25px, 10px) scale(1.02); }
+}
+
+/* Animated counter */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.counter-anim {
+  animation: countUp 0.6s ease forwards;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Module card hover glow */
+.module-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.4s ease;
+}
+.module-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(240, 200, 74, 0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(240,200,74,0.06);
+}
+
+/* Filter tab */
+.filter-tab {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.filter-tab:hover {
+  border-color: rgba(240,200,74,0.3);
+  background: rgba(240,200,74,0.05);
+}
+.filter-tab.active {
+  border-color: rgba(240,200,74,0.6);
+  background: rgba(240,200,74,0.1);
+  color: #f0c84a;
+}
+
+/* Platform card */
+.platform-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: all 0.3s ease;
+}
+.platform-card:hover {
+  border-color: rgba(34,201,122,0.3);
+  background: rgba(34,201,122,0.04);
+  transform: translateY(-4px);
+}
+
+/* Score ring gradient */
+.score-ring-outer {
+  background: conic-gradient(#f0c84a var(--pct), rgba(255,255,255,0.06) 0);
+  border-radius: 50%;
+  padding: 4px;
+}
+
+@keyframes scoreReveal {
+  from { --pct: 0%; }
+  to { --pct: var(--final-pct); }
+}
+
+/* Haptic pulse */
+@keyframes hapticPulse {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.97); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+.haptic {
+  animation: hapticPulse 0.3s ease;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240,200,74,0.2), transparent);
+  margin: 0;
+}
+
